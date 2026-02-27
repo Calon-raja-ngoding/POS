@@ -9,10 +9,10 @@ use App\Http\Controllers\SalesControlle;
 Route::get('/', [HomeController::class,'index']);
 
 Route::prefix('category')->group(function(){
-    Route::get('/food-beverage',[ProductController::class,'category']);
-    Route::get('/beauty-health',[ProductController::class,'category']);
-    Route::get('/home-care',[ProductController::class,'category']);
-    Route::get('/baby-kid',[ProductController::class,'category']);
+    Route::get('/food-beverage',[ProductController::class,'foodBeverage']);
+    Route::get('/beauty-health',[ProductController::class,'beautyHealth']);
+    Route::get('/home-care',[ProductController::class,'homeCare']);
+    Route::get('/baby-kid',[ProductController::class,'babyKid']);
 });
 
 Route::get('/user/{id}/name/{name}',[UserController::class,'profile']);
