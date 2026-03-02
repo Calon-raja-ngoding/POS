@@ -17,12 +17,12 @@ class UserController extends Controller
         //     'username' => 'customer-1',
         //     'nama' => 'Pelanggan 1',
         //     'password' => Hash::make('12345'),
-        //     'level_id' => 3,
+        //     'level_id' => 4,
         // ];
         // UserModel::insert($data);
 
         $data = [
-            'level_id' => 5,
+            'nama' => 'Pelanggan Pertama',
         ];
         UserModel::where('username', 'customer-1')->update($data);
 

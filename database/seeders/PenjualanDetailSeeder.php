@@ -54,7 +54,6 @@ class PenjualanDetailSeeder extends Seeder
             ['detail_id'=>29,'penjualan_id'=>10,'barang_id'=>9,'harga'=>12000,'jumlah'=>1],
             ['detail_id'=>30,'penjualan_id'=>10,'barang_id'=>15,'harga'=>14000,'jumlah'=>1],
         ];
-
         DB::table('t_penjualan_detail')->insert($data);
     }
 }
