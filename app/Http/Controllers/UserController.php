@@ -12,6 +12,35 @@ class UserController extends Controller
             'name'=>$name
         ]);
     }
+    public function hapus($id){
+        $user = UserModel::find($id);
+        $user->delete();
+        return redirect('/user');
+    }
+    public function ubah($id){
+        $data = UserModel::find($id);
+        return view('user_ubah',['data'=>$data]);
+    }
+    public function ubah_simpan(Request $request, $id){
+        $user = UserModel::find($id);
+        $user->username = $request->username;
+        $user->nama = $request->nama;
+        $user->level_id = $request->level_id;
+        $user->save();
+        return redirect('/user');
+    }
+    public function tambah_simpan(Request $request){
+        $user = UserModel::create([
+            'username' => $request->username,
+            'nama'     => $request->nama,
+            'password' => Hash::make('$request->password'),
+            'level_id' => $request->level_id
+        ]);
+        return redirect('/user');
+    }
+    public function tambah(){
+        return view('user_tambah');
+    }
     public function index(){
         // $data = [
         //     'username' => 'manager_tiga',
@@ -64,22 +93,25 @@ class UserController extends Controller
         // $user->isClean(); // true
         
         // dd($user->isDirty());
-        $user = UserModel::create([
-            'username' => 'manager11',
-            'nama'     => 'Manager11',
-            'password' => Hash::make('12345'),
-            'level_id' => 2,
-        ]);
+        // $user = UserModel::create([
+        //     'username' => 'manager11',
+        //     'nama'     => 'Manager11',
+        //     'password' => Hash::make('12345'),
+        //     'level_id' => 2,
+        // ]);
 
-        $user->username = 'manager12';
+        // $user->username = 'manager12';
 
-        $user->save();
+        // $user->save();
 
-        $user->wasChanged(); // true
-        $user->wasChanged('username'); // true
-        $user->wasChanged(['username', 'level_id']); // true
-        $user->wasChanged('nama'); // false
-        dd($user->wasChanged(['nama', 'username'])); // true
+        // $user->wasChanged(); // true
+        // $user->wasChanged('username'); // true
+        // $user->wasChanged(['username', 'level_id']); // true
+        // $user->wasChanged('nama'); // false
+        // dd($user->wasChanged(['nama', 'username'])); // true
+
+        $user = UserModel::with('level')->get();
+        return view('user',['data'=>$user]);
     }
     public function delete(){
         $row = DB::delete('delete from m_user where nama = ?', ['Pelanggan 1']);
