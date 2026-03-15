@@ -13,21 +13,24 @@ class UserController extends Controller
         ]);
     }
     public function index(){
-        $data = [
-            'username' => 'manager_tiga',
-            'nama' => 'Manager 3',
-            'password' => Hash::make('12345'),
-            'level_id' => 2,
-        ];
-        UserModel::insert($data);
+        // $data = [
+        //     'username' => 'manager_tiga',
+        //     'nama' => 'Manager 3',
+        //     'password' => Hash::make('12345'),
+        //     'level_id' => 2,
+        // ];
+        // UserModel::insert($data);
 
         // $data = [
         //     'nama' => 'Pelanggan Pertama',
         // ];
         // UserModel::where('username', 'customer-1')->update($data);
 
-        $user = UserModel::all();
-        return view('user',['data'=>$user]); 
+        // $user = UserModel::all();
+        // return view('user',['data'=>$user]);
+        
+        $user = UserModel::where('username', 'manager9')->firstOrFail();
+        return view('user',['data'=>$user]);
     }
     public function delete(){
         $row = DB::delete('delete from m_user where nama = ?', ['Pelanggan 1']);
